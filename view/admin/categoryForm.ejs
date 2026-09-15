@@ -1,0 +1,57 @@
+<div class="flex-1 min-w-0">
+      <header class="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-4 sm:px-8 sticky top-0 z-20">
+        <div class="flex items-center gap-3">
+          <button @click="sidebarOpen=!sidebarOpen" class="lg:hidden p-2 text-slate-500"><i data-lucide="menu" class="w-5 h-5"></i></button>
+          <a href="/admin/categories" class="p-2 -ml-2 text-slate-500 hover:text-slate-700"><i data-lucide="arrow-left" class="w-5 h-5"></i></a>
+          <h1 class="text-lg font-bold text-slate-900">Edit Category</h1>
+        </div>
+        <button class="px-4 py-2 bg-indigo-600 text-white text-sm font-semibold rounded-lg hover:bg-indigo-700 transition">Save Category</button>
+      </header>
+
+      <main class="p-4 sm:p-8 max-w-2xl">
+        <form action="/categories" method="POST" 
+        class="bg-white rounded-2xl border border-slate-200 p-6 space-y-5">
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1.5">Name</label>
+            <% if(errors && errors.title){ %>
+              <p class="text-red-500 text-xs mb-2"><%= errors.title %></p>
+            <% } %>
+            <input type="text" name="title"
+            value="<%= oldData && oldData.title ? oldData.title : "" %>"
+            class="w-full px-3.5 py-2.5 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1.5">Slug</label>
+            <% if(errors && errors.slug){ %>
+              <p class="text-red-500 text-xs mb-2"><%= errors.slug %></p>
+            <% } %>
+            <input 
+            type="text" name="slug"
+            value="<%= oldData && oldData.slug ? oldData.slug : "" %>"
+            class="w-full px-3.5 py-2.5 border border-slate-200 rounded-lg text-sm text-slate-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+            <p class="text-xs text-slate-400 mt-1.5">Used in the URL: devblog.com/category/frontend</p>
+          </div>
+          <!-- <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1.5">Description</label>
+            <textarea rows="4" class="w-full px-3.5 py-2.5 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none resize-none">UI, CSS, JavaScript frameworks, and everything client-side.</textarea>
+          </div> -->
+          <!-- <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1.5">Icon</label>
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center shrink-0"><i data-lucide="code-2" class="w-5 h-5 text-indigo-600"></i></div>
+              <select class="flex-1 px-3.5 py-2.5 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                <option>code-2</option>
+                <option>server</option>
+                <option>container</option>
+                <option>briefcase</option>
+                <option>database</option>
+              </select>
+            </div>
+          </div> -->
+          <div class="flex justify-end gap-3 pt-2 border-t border-slate-100">
+            <a href="categories.html" class="px-4 py-2.5 text-sm font-semibold text-slate-600 hover:bg-slate-50 rounded-lg">Cancel</a>
+            <button class="px-5 py-2.5 text-sm font-semibold text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition">Save Category</button>
+          </div>
+        </form>
+      </main>
+    </div>

@@ -1,0 +1,131 @@
+<div class="flex-1 min-w-0">
+      <header class="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-4 sm:px-8 sticky top-0 z-20">
+        <div class="flex items-center gap-3">
+          <button @click="sidebarOpen=!sidebarOpen" class="lg:hidden p-2 text-slate-500"><i data-lucide="menu" class="w-5 h-5"></i></button>
+          <h1 class="text-lg font-bold text-slate-900">Categories</h1>
+        </div>
+        <a href="/admin/new-category" class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white text-sm font-semibold rounded-lg hover:bg-indigo-700 transition">
+          <i data-lucide="plus" class="w-4 h-4"></i> New Category
+        </a>
+      </header>
+
+      <main class="p-4 sm:p-8">
+        <% if(errors && errors.notFound) { %>
+          <p class="text-red-500 text-xs mb-2"><%= errors.slug %></p>
+        <% } %>
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+          <div class="overflow-x-auto thin-scrollbar">
+            <table class="w-full text-sm">
+              <thead class="bg-slate-50 text-slate-500 border-b border-slate-200">
+                <tr>
+                  <th class="text-left font-semibold px-5 py-3">Name</th>
+                  <th class="text-left font-semibold px-5 py-3">Slug</th>
+                  <th class="text-left font-semibold px-5 py-3">Description</th>
+                  <th class="text-left font-semibold px-5 py-3">Posts</th>
+                  <th class="text-right font-semibold px-5 py-3">Actions</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100">
+                <% categories.forEach(category => { %>
+                  <tr class="hover:bg-slate-50">
+                    <td class="px-5 py-3">
+                      <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-lg bg-indigo-100 flex items-center justify-center shrink-0">
+                          <i data-lucide="code-2" class="w-4 h-4 text-indigo-600"></i>
+                           <!-- <img src="<%= category.image %>" alt="category"> -->
+                        </div>
+                        <span class="font-medium text-slate-800"><%= category.title %></span>
+                      </div>
+                    </td>
+                    <td class="px-5 py-3 text-slate-500"><%= category.slug %></td>
+                    <td class="px-5 py-3 text-slate-500 line-clamp-1 max-w-xs">UI, CSS, JavaScript frameworks, and everything client-side.</td>
+                    <td class="px-5 py-3 text-slate-600">86</td>
+                    <td class="px-5 py-3 text-right">
+                      <div class="flex justify-end gap-1">
+                        <a href="/categories/<%= category.slug %>" title="View" class="p-2 text-slate-400 hover:text-indigo-600 rounded-lg hover:bg-slate-100"><i data-lucide="eye" class="w-4 h-4"></i></a>
+                        <a href="/admin/categories/<%= category.slug %>" title="Edit" class="p-2 text-slate-400 hover:text-indigo-600 rounded-lg hover:bg-slate-100"><i data-lucide="pencil" class="w-4 h-4"></i></a>
+                        <form action="/categories/<%= category.slug %>/delete" method="POST">
+                        <button title="Delete" class="p-2 text-slate-400 hover:text-red-600 rounded-lg hover:bg-slate-100"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                        </form>
+                      </div>
+                    </td>
+                  </tr>
+                <% }) %>
+                <!-- <tr class="hover:bg-slate-50">
+                  <td class="px-5 py-3">
+                    <div class="flex items-center gap-3">
+                      <div class="w-9 h-9 rounded-lg bg-indigo-100 flex items-center justify-center shrink-0"><i data-lucide="code-2" class="w-4 h-4 text-indigo-600"></i></div>
+                      <span class="font-medium text-slate-800">Frontend</span>
+                    </div>
+                  </td>
+                  <td class="px-5 py-3 text-slate-500">frontend</td>
+                  <td class="px-5 py-3 text-slate-500 line-clamp-1 max-w-xs">UI, CSS, JavaScript frameworks, and everything client-side.</td>
+                  <td class="px-5 py-3 text-slate-600">86</td>
+                  <td class="px-5 py-3 text-right">
+                    <div class="flex justify-end gap-1">
+                      <a href="/categories/:slug" title="View" class="p-2 text-slate-400 hover:text-indigo-600 rounded-lg hover:bg-slate-100"><i data-lucide="eye" class="w-4 h-4"></i></a>
+                      <a href="/admin/categories/" title="Edit" class="p-2 text-slate-400 hover:text-indigo-600 rounded-lg hover:bg-slate-100"><i data-lucide="pencil" class="w-4 h-4"></i></a>
+                      <button title="Delete" class="p-2 text-slate-400 hover:text-red-600 rounded-lg hover:bg-slate-100"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                    </div>
+                  </td>
+                </tr> -->
+                <!-- <tr class="hover:bg-slate-50">
+                  <td class="px-5 py-3">
+                    <div class="flex items-center gap-3">
+                      <div class="w-9 h-9 rounded-lg bg-emerald-100 flex items-center justify-center shrink-0"><i data-lucide="server" class="w-4 h-4 text-emerald-600"></i></div>
+                      <span class="font-medium text-slate-800">Backend</span>
+                    </div>
+                  </td>
+                  <td class="px-5 py-3 text-slate-500">backend</td>
+                  <td class="px-5 py-3 text-slate-500 line-clamp-1 max-w-xs">APIs, databases, server architecture, and performance.</td>
+                  <td class="px-5 py-3 text-slate-600">54</td>
+                  <td class="px-5 py-3 text-right">
+                    <div class="flex justify-end gap-1">
+                      <a href="../category-detail.html" title="View" class="p-2 text-slate-400 hover:text-indigo-600 rounded-lg hover:bg-slate-100"><i data-lucide="eye" class="w-4 h-4"></i></a>
+                      <a href="category-form.html" title="Edit" class="p-2 text-slate-400 hover:text-indigo-600 rounded-lg hover:bg-slate-100"><i data-lucide="pencil" class="w-4 h-4"></i></a>
+                      <button title="Delete" class="p-2 text-slate-400 hover:text-red-600 rounded-lg hover:bg-slate-100"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="hover:bg-slate-50">
+                  <td class="px-5 py-3">
+                    <div class="flex items-center gap-3">
+                      <div class="w-9 h-9 rounded-lg bg-violet-100 flex items-center justify-center shrink-0"><i data-lucide="container" class="w-4 h-4 text-violet-600"></i></div>
+                      <span class="font-medium text-slate-800">DevOps</span>
+                    </div>
+                  </td>
+                  <td class="px-5 py-3 text-slate-500">devops</td>
+                  <td class="px-5 py-3 text-slate-500 line-clamp-1 max-w-xs">CI/CD, containers, infrastructure, and deployment strategies.</td>
+                  <td class="px-5 py-3 text-slate-600">31</td>
+                  <td class="px-5 py-3 text-right">
+                    <div class="flex justify-end gap-1">
+                      <a href="../category-detail.html" title="View" class="p-2 text-slate-400 hover:text-indigo-600 rounded-lg hover:bg-slate-100"><i data-lucide="eye" class="w-4 h-4"></i></a>
+                      <a href="category-form.html" title="Edit" class="p-2 text-slate-400 hover:text-indigo-600 rounded-lg hover:bg-slate-100"><i data-lucide="pencil" class="w-4 h-4"></i></a>
+                      <button title="Delete" class="p-2 text-slate-400 hover:text-red-600 rounded-lg hover:bg-slate-100"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="hover:bg-slate-50">
+                  <td class="px-5 py-3">
+                    <div class="flex items-center gap-3">
+                      <div class="w-9 h-9 rounded-lg bg-rose-100 flex items-center justify-center shrink-0"><i data-lucide="briefcase" class="w-4 h-4 text-rose-600"></i></div>
+                      <span class="font-medium text-slate-800">Career</span>
+                    </div>
+                  </td>
+                  <td class="px-5 py-3 text-slate-500">career</td>
+                  <td class="px-5 py-3 text-slate-500 line-clamp-1 max-w-xs">Interviews, growth, and life as a software engineer.</td>
+                  <td class="px-5 py-3 text-slate-600">18</td>
+                  <td class="px-5 py-3 text-right">
+                    <div class="flex justify-end gap-1">
+                      <a href="../category-detail.html" title="View" class="p-2 text-slate-400 hover:text-indigo-600 rounded-lg hover:bg-slate-100"><i data-lucide="eye" class="w-4 h-4"></i></a>
+                      <a href="category-form.html" title="Edit" class="p-2 text-slate-400 hover:text-indigo-600 rounded-lg hover:bg-slate-100"><i data-lucide="pencil" class="w-4 h-4"></i></a>
+                      <button title="Delete" class="p-2 text-slate-400 hover:text-red-600 rounded-lg hover:bg-slate-100"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                    </div>
+                  </td>
+                </tr> -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>

@@ -1,0 +1,143 @@
+<!-- Main content -->
+    <div class="flex-1 min-w-0">
+      <!-- Topbar -->
+      <header class="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-4 sm:px-8 sticky top-0 z-20">
+        <div class="flex items-center gap-3">
+          <button @click="sidebarOpen=!sidebarOpen" class="lg:hidden p-2 text-slate-500"><i data-lucide="menu" class="w-5 h-5"></i></button>
+          <h1 class="text-lg font-bold text-slate-900">Dashboard</h1>
+        </div>
+        <div class="flex items-center gap-4">
+          <button class="relative p-2 text-slate-500 hover:text-slate-700">
+            <i data-lucide="bell" class="w-5 h-5"></i>
+            <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+          </button>
+          <div class="flex items-center gap-2">
+            <img src="<%= user.avatar %>" class="w-8 h-8 rounded-full" alt="Admin avatar" />
+            <span class="text-sm font-medium text-slate-700 hidden sm:block"><%= user.username %></span>
+          </div>
+        </div>
+      </header>
+
+      <main class="p-4 sm:p-8">
+        <!-- Stat cards -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div class="bg-white rounded-2xl border border-slate-200 p-6">
+            <div class="flex items-center justify-between mb-3">
+              <div class="w-10 h-10 rounded-xl bg-indigo-100 flex items-center justify-center"><i data-lucide="file-text" class="w-5 h-5 text-indigo-600"></i></div>
+              <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full flex items-center gap-0.5"><i data-lucide="arrow-up" class="w-3 h-3"></i> 12%</span>
+            </div>
+            <p class="text-2xl font-bold text-slate-900">248</p>
+            <p class="text-sm text-slate-500">Total Posts</p>
+          </div>
+          <div class="bg-white rounded-2xl border border-slate-200 p-6">
+            <div class="flex items-center justify-between mb-3">
+              <div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center"><i data-lucide="users" class="w-5 h-5 text-emerald-600"></i></div>
+              <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full flex items-center gap-0.5"><i data-lucide="arrow-up" class="w-3 h-3"></i> 8%</span>
+            </div>
+            <p class="text-2xl font-bold text-slate-900">1,432</p>
+            <p class="text-sm text-slate-500">Registered Users</p>
+          </div>
+          <div class="bg-white rounded-2xl border border-slate-200 p-6">
+            <div class="flex items-center justify-between mb-3">
+              <div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center"><i data-lucide="message-circle" class="w-5 h-5 text-amber-600"></i></div>
+              <span class="text-xs font-semibold text-red-500 bg-red-50 px-2 py-0.5 rounded-full flex items-center gap-0.5"><i data-lucide="arrow-down" class="w-3 h-3"></i> 3%</span>
+            </div>
+            <p class="text-2xl font-bold text-slate-900">3,921</p>
+            <p class="text-sm text-slate-500">Total Comments</p>
+          </div>
+          <div class="bg-white rounded-2xl border border-slate-200 p-6">
+            <div class="flex items-center justify-between mb-3">
+              <div class="w-10 h-10 rounded-xl bg-violet-100 flex items-center justify-center"><i data-lucide="folder" class="w-5 h-5 text-violet-600"></i></div>
+              <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full flex items-center gap-0.5"><i data-lucide="arrow-up" class="w-3 h-3"></i> 2%</span>
+            </div>
+            <p class="text-2xl font-bold text-slate-900">14</p>
+            <p class="text-sm text-slate-500">Categories</p>
+          </div>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-6">
+          <!-- Recent posts -->
+          <div class="lg:col-span-2 bg-white rounded-2xl border border-slate-200">
+            <div class="flex items-center justify-between p-5 border-b border-slate-100">
+              <h2 class="font-bold text-slate-900">Recent Posts</h2>
+              <a href="/admin/posts" class="text-sm font-semibold text-indigo-600 hover:text-indigo-700">View all</a>
+            </div>
+            <div class="divide-y divide-slate-100">
+              <% posts.forEach(post => { %>
+                <div class="flex items-center gap-4 p-4">
+                  <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-indigo-400 to-purple-500 shrink-0"></div>
+                  <div class="flex-1 min-w-0">
+                    <p class="font-medium text-slate-800 text-sm line-clamp-1"><%= post.text %></p>
+                    <p class="text-xs text-slate-400">by <%= post.author.username %> · Aug 18, 2026</p>
+                  </div>
+                  <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full shrink-0">Published</span>
+                </div>
+              <% }) %>
+              <!-- <div class="flex items-center gap-4 p-4">
+                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-indigo-400 to-purple-500 shrink-0"></div>
+                <div class="flex-1 min-w-0">
+                  <p class="font-medium text-slate-800 text-sm line-clamp-1">Mastering Tailwind CSS: Building Scalable Design Systems</p>
+                  <p class="text-xs text-slate-400">by Sara Ahmadi · Aug 18, 2026</p>
+                </div>
+                <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full shrink-0">Published</span>
+              </div> -->
+              <!-- <div class="flex items-center gap-4 p-4">
+                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-emerald-400 to-teal-500 shrink-0"></div>
+                <div class="flex-1 min-w-0">
+                  <p class="font-medium text-slate-800 text-sm line-clamp-1">Designing REST APIs That Scale With Your Team</p>
+                  <p class="text-xs text-slate-400">by Kian Rezaei · Aug 15, 2026</p>
+                </div>
+                <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full shrink-0">Published</span>
+              </div>
+              <div class="flex items-center gap-4 p-4">
+                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-400 to-orange-500 shrink-0"></div>
+                <div class="flex-1 min-w-0">
+                  <p class="font-medium text-slate-800 text-sm line-clamp-1">Draft: Notes on Component Testing Strategies</p>
+                  <p class="text-xs text-slate-400">by Leila Tabrizi · edited 2 days ago</p>
+                </div>
+                <span class="text-xs font-semibold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full shrink-0">Draft</span>
+              </div>
+              <div class="flex items-center gap-4 p-4">
+                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-rose-400 to-pink-500 shrink-0"></div>
+                <div class="flex-1 min-w-0">
+                  <p class="font-medium text-slate-800 text-sm line-clamp-1">Accessible Color Systems for Modern Web Apps</p>
+                  <p class="text-xs text-slate-400">by Omid Karimi · Aug 6, 2026</p>
+                </div>
+                <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full shrink-0">Published</span>
+              </div> -->
+            </div>
+          </div>
+
+          <!-- Pending comments -->
+          <div class="bg-white rounded-2xl border border-slate-200">
+            <div class="flex items-center justify-between p-5 border-b border-slate-100">
+              <h2 class="font-bold text-slate-900">Pending Comments</h2>
+              <a href="/admin/comments" class="text-sm font-semibold text-indigo-600 hover:text-indigo-700">View all</a>
+            </div>
+            <div class="divide-y divide-slate-100">
+              <div class="p-4">
+                <div class="flex items-center gap-2 mb-1.5">
+                  <img src="https://i.pravatar.cc/40?img=33" class="w-6 h-6 rounded-full" alt="Commenter" />
+                  <span class="text-sm font-medium text-slate-800">Reza Moradi</span>
+                </div>
+                <p class="text-sm text-slate-500 line-clamp-2">Great breakdown of the extraction pattern. We recently refactored our button...</p>
+              </div>
+              <!-- <div class="p-4">
+                <div class="flex items-center gap-2 mb-1.5">
+                  <img src="https://i.pravatar.cc/40?img=48" class="w-6 h-6 rounded-full" alt="Commenter" />
+                  <span class="text-sm font-medium text-slate-800">Leila Tabrizi</span>
+                </div>
+                <p class="text-sm text-slate-500 line-clamp-2">Curious how you handle dark mode tokens alongside this setup...</p>
+              </div>
+              <div class="p-4">
+                <div class="flex items-center gap-2 mb-1.5">
+                  <img src="https://i.pravatar.cc/40?img=59" class="w-6 h-6 rounded-full" alt="Commenter" />
+                  <span class="text-sm font-medium text-slate-800">Amir Hashemi</span>
+                </div>
+                <p class="text-sm text-slate-500 line-clamp-2">Solid points on config discipline. Ever-growing theme.extend...</p>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>

@@ -1,0 +1,88 @@
+<!-- Category header -->
+  <section class="bg-gradient-to-br from-indigo-600 to-purple-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <nav class="text-sm text-indigo-200 mb-4 flex items-center gap-1.5">
+        <a href="/" class="hover:text-white">Home</a>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+        <a href="/categories" class="hover:text-white">Categories</a>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+        <span class="text-white font-medium"><%= category.title %></span>
+      </nav>
+      <div class="flex items-center gap-4">
+        <div class="w-14 h-14 rounded-2xl bg-white/15 flex items-center justify-center shrink-0">
+          <!-- <i data-lucide="code" class="w-7 h-7 text-white"></i> -->
+           <img src="<%= category.image %>" class="w-full h-full rounded-md" alt="">
+        </div>
+        <div>
+          <h1 class="text-3xl font-extrabold text-white"><%= category.title %></h1>
+          <p class="text-indigo-100 mt-1">UI engineering, frameworks, accessibility, and everything in the browser. · 24 posts</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="flex items-center justify-between mb-8">
+      <h2 class="text-xl font-bold text-slate-900">Posts in Frontend</h2>
+      <select class="text-sm border border-slate-200 rounded-lg px-3 py-2 bg-white text-slate-600 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+        <option>Newest first</option>
+        <option>Oldest first</option>
+        <option>Most commented</option>
+      </select>
+    </div>
+    
+    <% if(!posts.length) { %>
+      <p>There is no post for this category yet.</p>
+    <% } %>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <% posts.forEach(post => { %>
+        <a href="/posts/<%= post.slug %>" class="fade-in group bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition flex flex-col">
+          <div class="h-40 bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center">
+            <!-- <i data-lucide="image" class="w-8 h-8 text-white/70"></i> -->
+             <img class="w-full h-full" src="<%= post.image %>" alt="">
+          </div>
+          <div class="p-5 flex flex-col flex-1">
+            <h3 class="font-bold text-slate-900 group-hover:text-indigo-600 transition mb-2 line-clamp-2">
+              <%= post.title %>
+            </h3>
+            <p class="text-slate-500 text-sm line-clamp-2 mb-4 flex-1">
+              <%= post.text %>
+            </p>
+            <div class="flex items-center gap-2 text-xs text-slate-500 mt-auto">
+              <img src="<%= post.author.avatar %>" class="w-6 h-6 rounded-full" alt="Author avatar" />
+              <span class="font-medium text-slate-700"><%= post.author.username %></span>
+              <span>·</span><span>Aug 18, 2026</span>
+            </div>
+          </div>
+        </a>
+      <% }) %>
+
+      <!-- <a href="post-detail.html" class="fade-in group bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition flex flex-col">
+        <div class="h-40 bg-gradient-to-br from-sky-400 to-blue-500 flex items-center justify-center">
+          <i data-lucide="image" class="w-8 h-8 text-white/70"></i>
+        </div>
+        <div class="p-5 flex flex-col flex-1">
+          <h3 class="font-bold text-slate-900 group-hover:text-indigo-600 transition mb-2 line-clamp-2">State Management in 2026: Do You Still Need Redux?</h3>
+          <p class="text-slate-500 text-sm line-clamp-2 mb-4 flex-1">Comparing signals, context, and lightweight stores.</p>
+          <div class="flex items-center gap-2 text-xs text-slate-500 mt-auto">
+            <img src="https://i.pravatar.cc/40?img=23" class="w-6 h-6 rounded-full" alt="Author avatar" />
+            <span class="font-medium text-slate-700">Sara Ahmadi</span>
+            <span>·</span><span>Aug 2, 2026</span>
+          </div>
+        </div>
+      </a>-->
+    </div>
+
+    <!-- Pagination -->
+    <div class="flex items-center justify-center gap-2 mt-10">
+      <button class="w-9 h-9 rounded-lg border border-slate-200 flex items-center justify-center text-slate-400" disabled>
+        <i data-lucide="chevron-left" class="w-4 h-4"></i>
+      </button>
+      <button class="w-9 h-9 rounded-lg bg-indigo-600 text-white font-medium">1</button>
+      <button class="w-9 h-9 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 font-medium">2</button>
+      <button class="w-9 h-9 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 font-medium">3</button>
+      <button class="w-9 h-9 rounded-lg border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-50">
+        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+      </button>
+    </div>
+  </main>
